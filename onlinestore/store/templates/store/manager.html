@@ -1,0 +1,56 @@
+{% extends 'store/base.html' %}
+
+{% block content %}
+    {% if error %}
+        <h2 style="color: red; text-align: center;">{{ error }}</h2>
+    {% endif %}
+    <form action="{% url 'manager' %}" method='POST'>
+        {% csrf_token %}
+        <input type="hidden" value="add" name="function">
+        <label for="users">Promote users</label>
+        <select name="user" id="users">
+            {% for user in non_managers %}
+                <option value="{{ user.username }}">{{ user.username }}</option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="Promote">
+    </form>
+
+    <form action="{% url 'manager' %}" method='POST'>
+        {% csrf_token %}
+        <input type="hidden" value="delete" name="function">
+        <label for="users">Demote users</label>
+        <select name="user" id="users">
+            {% for user in managers %}
+                <option value="{{ user.username }}">{{ user.username }}</option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="Demote">
+    </form>
+
+    <form class="formBox" enctype="multipart/form-data" action="{% url 'upload' %}" method='POST'>
+        {% csrf_token %}
+        <div class="formSeperator">
+            <label for="description">Enter description: </label>
+            <input type="text" name="description" id="description">
+            <br>
+        </div>
+        <div class="formSeperator">
+            <label for="price">Enter price: </label>
+            <input type="number" name="price" id="price" min="0">
+            <br>
+        </div>
+        <div class="formSeperator">
+            <label for="image">Enter image: </label>
+            <input type="file" name="image" id="image">
+            <br>
+        </div>
+
+        <input type="submit" value="PUT ON SALE!!">
+    </form>
+
+    {% if form %}
+        {{ form }}
+    {% endif %}
+
+{% endblock content %}

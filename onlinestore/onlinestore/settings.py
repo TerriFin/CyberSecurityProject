@@ -34,9 +34,13 @@ PASSWORD_HASHERS = [
     'onlinestore.badHash.BadHasher',
 ]
 
+# Here we use the original backend as backup to get access to permissions :-D
 AUTHENTICATION_BACKENDS = [
     'onlinestore.badBackend.BadBackend',
+    'django.contrib.auth.backends.ModelBackend',
 ]
+
+SESSION_ENGINE = 'onlinestore.badSessionStore'
 
 INSTALLED_APPS = [
     'store.apps.StoreConfig',
