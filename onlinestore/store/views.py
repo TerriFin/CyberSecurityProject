@@ -7,7 +7,6 @@ from .forms import ItemForm
 from django.contrib.auth.models import Permission
 from django.contrib.contenttypes.models import ContentType
 from django.db.models import Q
-import datetime
 
 def rediredToIndex(request: HttpRequest):
     return redirect('/0/')
@@ -17,14 +16,22 @@ def index(request: HttpRequest, page):
     items_per_page = 6
     starting_index = page * items_per_page
 
-    all_items = Item.objects.all()
-    filtered_items = all_items[starting_index:][:items_per_page]
+    if request.method == 'POST':
+        # Use .raw so that sql injections work :-D
+        items = Item.objects.raw("SELECT * FROM store_item WHERE description LIKE '%%{0}%%'".format(request.POST.get('query')))
+        print('FOUND WITH QUERY ' + str(items))
+        for r in items:
+            print(r)
+    else:
+        items = Item.objects.all()
+
+    filtered_items = items[starting_index:][:items_per_page]
 
     return render(request, 'store/index.html', {
         'items': filtered_items,
         'page': page,
         'first_page': starting_index == 0,
-        'last_page': starting_index + items_per_page >= len(all_items)}
+        'last_page': starting_index + items_per_page >= len(items)}
     )
 
 def login(request: HttpRequest):

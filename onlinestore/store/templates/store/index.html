@@ -1,6 +1,11 @@
 {% extends 'store/base.html' %}
 
 {% block content %}
+    <form action="{% url 'index' page %}" method="POST">
+    {% csrf_token %}
+        <input type="text" name="query" id="query">
+        <input type="submit" value="Search">
+    </form>
     <table>
         {% for item in items %}
             {% if forloop.first %}
