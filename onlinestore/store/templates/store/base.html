@@ -1,0 +1,25 @@
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'store/style.css' %}">
+
+<div class="topPanel">
+    <a class="topLink" href="{% url 'index' 0 %}">Store</a>
+
+    {% if user.is_authenticated %}
+        <p>Welcome {{ user.get_username }}</p>
+        <form action="{% url 'logout' %}" method="POST">
+            {% csrf_token %}
+            <input type="submit" value="Logout">
+        </form>
+    {% else %}
+        <a class="topLink" href="{% url 'login' %}">Login</a>
+        <a class="topLink" href="{% url 'register' %}">Register</a>
+    {% endif %}
+</div>
+
+<hr>
+
+<div class='content'>
+    {% block content %}
+    {% endblock  %}
+</div>

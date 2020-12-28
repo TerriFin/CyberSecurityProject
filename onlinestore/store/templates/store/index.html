@@ -1,0 +1,33 @@
+{% extends 'store/base.html' %}
+
+{% block content %}
+    <table>
+        {% for item in items %}
+            {% if forloop.first %}
+                <tr>
+            {% endif %}
+            <td class="itemContainer">
+                <img class="itemImage" src="{{ item.image.url }}" alt="Picture of stove in question">
+                <p class="itemDescription">{{ item.description }}</p>
+                <p class="itemPrice">$$ {{ item.price }} $$</p>
+                <a class="buyNow" href="/">BUY NOW!!</a>
+            </td>
+            {% if forloop.counter|divisibleby:3 %}
+                </tr><tr>
+            {% endif %}
+            {% if forloop.last %}
+                </tr>
+            {% endif %}
+        {% endfor %}
+    </table>
+
+
+    <div class="pageSelection">
+        {% if not first_page %}
+            <a class="leftButton" href="{% url 'index' page|add:"-1" %}">Prev</a>
+        {% endif %}
+        {% if not last_page %}
+            <a class="rightButton" href="{% url 'index' page|add:"1" %}">Next</a>
+        {% endif %}
+    </div>
+{% endblock content %}

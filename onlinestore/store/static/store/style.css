@@ -1,0 +1,82 @@
+hr {
+    width: 99%;
+    height: 2px;
+    background-color: 666;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+form {
+    text-align: center;
+    align-items: center;
+}
+
+.center {
+    text-align: center;
+}
+
+.itemContainer {
+    width: 30%;
+    height: 300px;
+    border: 4px solid black;
+    padding: 20px;
+    background-color: lightgoldenrodyellow;
+    text-align: center;
+}
+
+.topPanel {
+    size: auto;
+    border: 2px solid black;
+    padding: 5px;
+    background-color: lightgoldenrodyellow;
+    text-align: center;
+    margin: auto;
+}
+
+.topLink {
+    padding: 5px;
+}
+
+.itemImage {
+    width: 100%;
+    height: 100%;
+    mix-blend-mode: multiply;
+}
+
+.itemDescription {
+    font: italic;
+}
+
+.itemPrice {
+    color: green;
+    font-size: 200%;
+}
+
+.buyNow {
+    font-size: 200%;
+}
+
+.pageSelection {
+    padding: 20px;
+    text-align: center;
+}
+
+.leftButton {
+    margin: auto auto auto 0;
+    font-size: 150%;
+}
+
+.rightButton {
+    margin: auto 0 auto auto;
+    font-size: 150%;
+}
+
+.bigTextCenter {
+    font-size: 200%;
+    text-align: center;
+    padding: 10px;
+}
+
+.formSeperator {
+    padding: 5px;
+}
